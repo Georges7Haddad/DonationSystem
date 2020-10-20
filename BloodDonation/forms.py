@@ -6,7 +6,7 @@ class DateInput(forms.DateInput):
 
 
 class DonorForm(forms.Form):
-    GROUP_CHOICES = (
+    BLOOD_TYPE_CHOICES = (
         ("A+", "A+"),
         ("A-", "A-"),
         ("B+", "B+"),
@@ -31,7 +31,7 @@ class DonorForm(forms.Form):
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
     phone_number = forms.IntegerField()
     email_address = forms.EmailField()
-    blood_type = forms.ChoiceField(choices=GROUP_CHOICES)
+    blood_type = forms.ChoiceField(choices=BLOOD_TYPE_CHOICES)
     location = forms.ChoiceField(choices=CITIES_CHOICES)
 
     fields = [
