@@ -1,4 +1,3 @@
-
 from django import forms
 
 BLOOD_TYPE_CHOICES = (
@@ -10,7 +9,7 @@ BLOOD_TYPE_CHOICES = (
     ("O-", "O-"),
     ("AB+", "AB+"),
     ("AB-", "AB-"),
-    )
+)
 
 CITIES_CHOICES = (
     ("33.893791,35.501778", "Beirut"),
@@ -21,10 +20,12 @@ CITIES_CHOICES = (
     ("33.3796778,35.4704129", "Nabatieh"),
     ("34.3196628,35.6880946", "North"),
     ("33.3418595,35.0904916", "South"),
-    )
+)
+
 
 class DateInput(forms.DateInput):
     input_type = "date"
+
 
 class DonorForm(forms.Form):
     first_name = forms.CharField(max_length=26, min_length=2)
@@ -44,6 +45,7 @@ class DonorForm(forms.Form):
         blood_type,
         location
     ]
+
 
 class RequestForm(forms.Form):
     first_name = forms.CharField(max_length=26, min_length=2)

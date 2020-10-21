@@ -15,3 +15,7 @@ This data structure should save the requests, so we don't lose any blood request
 This database holds the blood donors who will get picked for a request.
 ## Flowchart
 ![alt text](Flowchart.png)
+
+#### Fixtures
+- python3 manage.py dumpdata BloodDonation.Donor > donors.json
+- python3 manage.py loaddata donors.json
