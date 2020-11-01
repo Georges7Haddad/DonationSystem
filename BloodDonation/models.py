@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from django.db import models
 
 BLOOD_TYPE_CHOICES = (
@@ -13,6 +12,7 @@ BLOOD_TYPE_CHOICES = (
     ("AB-", "AB-"),
 )
 
+
 class Request(models.Model):
     first_name = models.CharField(max_length=26)
     last_name = models.CharField(max_length=26)
@@ -21,7 +21,6 @@ class Request(models.Model):
     blood_type = models.CharField(max_length=3, choices=BLOOD_TYPE_CHOICES)
     location = models.CharField(max_length=26)
     units_needed = models.PositiveIntegerField()
-
 
 
 class Donor(models.Model):

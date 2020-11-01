@@ -11,10 +11,10 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 import os
+import pika
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import pika
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -85,24 +85,6 @@ DATABASES = {
 }
 
 
-# Queues
-
-QUEUE_PORT = 5672
-QUEUE_HOST = "localhost"
-conn_params = pika.ConnectionParameters(port=QUEUE_PORT, host=QUEUE_HOST)
-connection = pika.BlockingConnection(conn_params)
-channel = connection.channel()
-
-channel.queue_declare(queue='A+')
-channel.queue_declare(queue='A-')
-channel.queue_declare(queue='B+')
-channel.queue_declare(queue='B-')
-channel.queue_declare(queue='O+')
-channel.queue_declare(queue='O-')
-channel.queue_declare(queue='AB+')
-channel.queue_declare(queue='AB-')
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -140,3 +122,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Queues
+QUEUE_PORT = 5672
+QUEUE_HOST = "localhost"
+conn_params = pika.ConnectionParameters(port=QUEUE_PORT, host=QUEUE_HOST)
+connection = pika.BlockingConnection(conn_params)
+channel = connection.channel()
+
+channel.queue_declare(queue='A+')
+channel.queue_declare(queue='A-')
+channel.queue_declare(queue='B+')
+channel.queue_declare(queue='B-')
+channel.queue_declare(queue='O+')
+channel.queue_declare(queue='O-')
+channel.queue_declare(queue='AB+')
+channel.queue_declare(queue='AB-')
