@@ -86,6 +86,7 @@ DATABASES = {
 
 
 # Queues
+
 QUEUE_PORT = 5672
 QUEUE_HOST = "localhost"
 conn_params = pika.ConnectionParameters(port=QUEUE_PORT, host=QUEUE_HOST)

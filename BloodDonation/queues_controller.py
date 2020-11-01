@@ -1,11 +1,8 @@
-import dill
+from BloodDonation.messages_controller import *
 from DonationSystem.settings import channel
 
-
-def neg_O_callback(ch, method, properties, body):
-    request = dill.loads(body)
-    print(f" [x] Received {body}")
-
-
-channel.basic_consume(queue='O-', auto_ack=True, on_message_callback=neg_O_callback)
+channel.basic_consume(queue='O-', auto_ack=True, on_message_callback=send_messages_o_neg)
+#TODO : Other channels ...
 channel.start_consuming()
+
+

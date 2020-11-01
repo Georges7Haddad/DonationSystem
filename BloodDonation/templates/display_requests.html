@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+</head>
+<body>
+{% for request in requests %}
+    <p>{{request.first_name}} {{ request.last_name }}</p>
+    <a href="/confirmed_donation/{{ request.id }}" class="button">Confirm 1 Donation</a>
+{% endfor %}
+</body>
+</html>

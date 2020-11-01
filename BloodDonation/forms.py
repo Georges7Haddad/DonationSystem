@@ -54,6 +54,8 @@ class RequestForm(forms.Form):
     phone_number = forms.IntegerField()
     blood_type = forms.ChoiceField(choices=BLOOD_TYPE_CHOICES)
     location = forms.ChoiceField(choices=CITIES_CHOICES)
+    units_needed = forms.IntegerField()
+
 
     fields = [
         first_name,
@@ -61,5 +63,7 @@ class RequestForm(forms.Form):
         date_of_birth,
         phone_number,
         blood_type,
-        location
+        location,
+        units_needed
+
     ]
