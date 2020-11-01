@@ -14,6 +14,7 @@ import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import pika
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -82,6 +83,23 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
+
+
+# Queues
+QUEUE_PORT = 5672
+QUEUE_HOST = "localhost"
+conn_params = pika.ConnectionParameters(port=QUEUE_PORT, host=QUEUE_HOST)
+connection = pika.BlockingConnection(conn_params)
+channel = connection.channel()
+
+channel.queue_declare(queue='A+')
+channel.queue_declare(queue='A-')
+channel.queue_declare(queue='B+')
+channel.queue_declare(queue='B-')
+channel.queue_declare(queue='O+')
+channel.queue_declare(queue='O-')
+channel.queue_declare(queue='AB+')
+channel.queue_declare(queue='AB-')
 
 
 # Password validation

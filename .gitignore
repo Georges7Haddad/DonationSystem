@@ -104,6 +104,8 @@ ENV/
 *.pyc
 /static/
 .idea/
+.DonationSystem/__pycache__
+.DonationSystem/__pycache__/
 *.iml
 local_testing.py
 **/.DS_Store
