@@ -1,15 +1,18 @@
+import dill
+
 from django.shortcuts import render
 from BloodDonation.forms import *
 from BloodDonation.models import Donor
 from django.http import HttpResponse
+from DonationSystem.settings import channel, connection
 
-# TODO: !!!!  CREATE YOUR OWN BRANCH  !!!!
-#       git branch          Check all branches
-#       git checkout -b branch_name         Create branch_name and change to it
+
+# TODO:
 #       1 - Whatsapp Client and sending one message Karim
-#       2 - rbmq client: enqeueing an object and dequeuing Georges
 #       3 - Processing a request: query for all donors and get numbers for whatsapp Kamil
 #       4 - Handling locations Nader
+
+
 def register_donor(request):
     if request.method == "POST":
         donor_form = DonorForm(request.POST)
@@ -30,10 +33,12 @@ def confirmation_message_request(request):
 
 
 def request_form(request):
-    # if request.method == "POST":
-    #   request_form = RequestForm(request.POST)
-    #  if request_form.is_valid():
-    #      Send The Request to our Queue og Requests
-    #
+    if request.method == "POST":
+        request_form = RequestForm(request.POST)
+        if request_form.is_valid():
+            blood_type = request_form.cleaned_data["blood_type"]
+            channel.basic_publish(exchange='', routing_key=blood_type, body=dill.dumps(request_form.cleaned_data))
+            connection.close()  # todo: check if needed
+
     request_form = RequestForm()
     return render(request=request, template_name="request_form.html", context={"request_form": request_form})
