@@ -65,5 +65,4 @@ class RequestForm(forms.Form):
         blood_type,
         location,
         units_needed
-
     ]

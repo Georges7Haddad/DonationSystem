@@ -3,8 +3,8 @@ import dill
 from django.shortcuts import render, redirect
 
 from BloodDonation.confirmations_controller import confirm_donation
-from BloodDonation.forms import *
-from BloodDonation.models import *
+from BloodDonation.forms import RequestForm, DonorForm
+from BloodDonation.models import Donor, Request
 from django.http import HttpResponse
 from DonationSystem.settings import channel, connection
 
@@ -26,9 +26,9 @@ def register_donor(request):
     return render(request=request, template_name="register_donor.html", context={"donor_form": donor_form})
 
 
-def donation_confirmation(request,int):
+def donation_confirmation(request, int):
     message = confirm_donation(int)
-    #TODO: print(message) (with how many units still needed)
+    # TODO: print(message) (with how many units still needed)
     return redirect("/display_requests/")
 
 
@@ -43,10 +43,11 @@ def request_form(request):
             request1 = Request(**request_form.cleaned_data)
             request1.save()
             blood_type = request_form.cleaned_data["blood_type"]
-            channel.basic_publish(exchange='', routing_key=blood_type, body=dill.dumps(request_form.cleaned_data))
+            channel.basic_publish(exchange='', routing_key=blood_type, body=dill.dumps(request1))
             connection.close()  # todo: check if needed
     request_form = RequestForm()
     return render(request=request, template_name="request_form.html", context={"request_form": request_form})
+
 
 def display_requests(request):
     requests = Request.objects.all()
