@@ -1,0 +1,47 @@
+[
+  {
+    "model": "BloodDonation.donor",
+    "pk": 1,
+    "fields": {
+      "first_name": "test",
+      "last_name": "test",
+      "date_of_birth": "2020-10-05",
+      "phone_number": 1,
+      "email_address": "test@mail.com",
+      "blood_type": "O-",
+      "location": "32.23432423,32.2545245",
+      "last_time_donated": "2020-10-20",
+      "can_donate": "True"
+    }
+  },
+  {
+    "model": "BloodDonation.donor",
+    "pk": 2,
+    "fields": {
+      "first_name": "Georges",
+      "last_name": "Haddad",
+      "date_of_birth": "2009-06-10",
+      "phone_number": 81716166,
+      "email_address": "georges7haddad@gmail.com",
+      "blood_type": "O-",
+      "location": "33.893791,35.501778",
+      "last_time_donated": "2020-10-20",
+      "can_donate": "1"
+    }
+  },
+  {
+    "model": "BloodDonation.donor",
+    "pk": 3,
+    "fields": {
+      "first_name": "university of",
+      "last_name": "berkeley",
+      "date_of_birth": "2020-10-09",
+      "phone_number": 81716166,
+      "email_address": "test@mail.com",
+      "blood_type": "A+",
+      "location": "33.893791,35.501778",
+      "last_time_donated": "2020-10-21",
+      "can_donate": "1"
+    }
+  }
+]
