@@ -6,7 +6,7 @@
 </head>
 <body>
 {% for request in requests %}
-    <p>{{request.first_name}} {{ request.last_name }}</p>
+    <p>{{request.first_name}} {{ request.last_name }} {{ request.blood_type }} Units Needed: {{ request.units_needed }}</p>
     <a href="/confirmed_donation/{{ request.id }}" class="button">Confirm 1 Donation</a>
 {% endfor %}
 </body>

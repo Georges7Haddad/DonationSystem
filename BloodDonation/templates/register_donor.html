@@ -4,6 +4,15 @@
     <meta charset="UTF-8">
     <title>Register</title>
     <h1>Register</h1>
+    {% if duplicate == True %}
+        <h4>You are already a registered as a donor</h4>
+    {% endif %}
+    {% if phone_error == True %}
+        <h4>Please check your phone number</h4>
+    {% endif %}
+    {% if too_young == True %}
+        <h4>You must be between 18 and 65 to donate</h4>
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
         <label>First Name</label>
@@ -18,7 +27,7 @@
         {{ donor_form.phone_number }}
         <br> <br> <label>Blood Type</label>
         {{ donor_form.blood_type }}
-        <br> <br> <label>District</label>
+        <br> <br> <label>Preferred District</label>
         {{ donor_form.location }}
         <br><br><br>
         <button>SUBMIT</button>

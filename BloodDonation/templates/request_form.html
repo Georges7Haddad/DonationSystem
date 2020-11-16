@@ -4,8 +4,15 @@
     <meta charset="UTF-8">
     <title>Request</title>
     <h1>Request</h1>
+    {% if duplicate == True %}
+        <h4>Duplicate Request</h4>
+    {% endif %}
+    {% if phone_error == True %}
+        <h4>Please check your phone number</h4>
+    {% endif %}
     <form method="POST">
         {% csrf_token %}
+        <h3>Please insert the following information about the patient</h3>
         <label>First Name</label>
         {{ request_form.first_name }}
         <br> <br> <label>Last Name</label>
