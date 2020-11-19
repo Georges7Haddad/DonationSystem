@@ -27,13 +27,63 @@
         {{ donor_form.phone_number }}
         <br> <br> <label>Blood Type</label>
         {{ donor_form.blood_type }}
-        <br> <br> <label>Preferred District</label>
-        {{ donor_form.location }}
+        {% if location_empty == True %}
+            <h4>Please enter your location</h4>
+        {% endif %}
+        <br> <br> <label for="long" id="longLabel">Longitude</label>
+        {{ donor_form.longitude }}
+        <br> <br> <label for="lat" id="latLabel">Latitude</label>
+        {{ donor_form.latitude }}
         <br><br><br>
-        <button>SUBMIT</button>
+
+        {#    <div class="container" style="float: right">#}
+        {#        <iframe#}
+        {#                width="600"#}
+        {#                height="500"#}
+        {#                style="border:0"#}
+        {#                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCB02UrjJJLlxJTnzVNkl4Xfne-BKrqz7s&maptype=roadmap&q=place_id:ChIJs--MqP1YwokRBwAhjXWIHn8"#}
+        {#                allowfullscreen>#}
+        {#        </iframe>#}
+        {#    </div>#}
+
+        <button onclick="checkLocation()">SUBMIT</button>
     </form>
+    <button id="getLocationButton" onclick="getLocation()">Get Location</button>
 </head>
 <body>
 
 </body>
 </html>
+<script>
+    var x = document.getElementById("long");
+    var y = document.getElementById("lat");
+    var getLocationButton = document.getElementById("getLocationButton");
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+        getLocationButton.insertAdjacentText("afterend", "We will have your location by the time you finish reading this and we'll be displaying your coordinates");
+    }
+
+    function showPosition(position) {
+        x.value = position.coords.longitude;
+        y.value = position.coords.latitude;
+    }
+</script>
+<script>
+    var x = document.getElementById("long");
+    var y = document.getElementById("lat");
+    var xLabel = document.getElementById("longLabel");
+    var yLabel = document.getElementById("latLabel");
+
+    function checkLocation() {
+        if (x.value == null) {
+            x.setAttribute("readonly", "false");
+            x.insertAdjacentText("afterend", "Please add location");
+        }
+    }
+
+</script>

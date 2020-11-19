@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import NumberInput
 
 BLOOD_TYPE_CHOICES = (
     ("A+", "A+"),
@@ -34,7 +35,8 @@ class DonorForm(forms.Form):
     phone_number = forms.IntegerField()
     email_address = forms.EmailField()
     blood_type = forms.ChoiceField(choices=BLOOD_TYPE_CHOICES)
-    location = forms.ChoiceField(choices=CITIES_CHOICES)
+    longitude = forms.FloatField(widget=NumberInput(attrs={'id': 'long', 'readonly': 'readonly'}))
+    latitude = forms.FloatField(widget=NumberInput(attrs={'id': 'lat', 'readonly': 'readonly'}))
 
     fields = [
         first_name,
@@ -43,7 +45,8 @@ class DonorForm(forms.Form):
         phone_number,
         email_address,
         blood_type,
-        location
+        longitude,
+        latitude
     ]
 
 
@@ -55,7 +58,6 @@ class RequestForm(forms.Form):
     blood_type = forms.ChoiceField(choices=BLOOD_TYPE_CHOICES)
     location = forms.ChoiceField(choices=CITIES_CHOICES)
     units_needed = forms.IntegerField()
-
 
     fields = [
         first_name,

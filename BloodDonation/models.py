@@ -19,8 +19,8 @@ class Request(models.Model):
     date_of_birth = models.DateField()
     phone_number = models.PositiveIntegerField(unique=True)
     blood_type = models.CharField(max_length=3, choices=BLOOD_TYPE_CHOICES)
-    x_location = models.FloatField()
-    y_location = models.FloatField()
+    longitude = models.FloatField()
+    latitude = models.FloatField()
     units_needed = models.PositiveIntegerField()
 
     def __str__(self):
@@ -34,8 +34,8 @@ class Donor(models.Model):
     phone_number = models.PositiveIntegerField(unique=True)
     email_address = models.EmailField()
     blood_type = models.CharField(max_length=3, choices=BLOOD_TYPE_CHOICES)
-    x_location = models.FloatField()
-    y_location = models.FloatField()
+    longitude = models.FloatField()
+    latitude = models.FloatField()
     last_time_donated = models.DateField(default=datetime.today().strftime('%Y-%m-%d'))
     can_donate = models.BooleanField(default=True)
 

@@ -16,7 +16,7 @@ def get_donors(blood_type, body):
 
     donors = [(
         donor,
-        math.sqrt(((request.x_location - donor.x_location) ** 2) + ((request.y_location - donor.y_location) ** 2))
+        math.sqrt(((request.longitude - donor.longitude) ** 2) + ((request.latitude - donor.latitude) ** 2))
     ) for donor in all_possible_donors]
     donors.sort(key=lambda tup: tup[1])
     return request, donors

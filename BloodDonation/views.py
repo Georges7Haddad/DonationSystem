@@ -30,16 +30,16 @@ def register_donor(request):
                 return render(request=request, template_name="register_donor.html",
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
                                        "too_young": True})
-            donor_data["x_location"] = float(donor_data['location'].split(",")[0])
-            donor_data["y_location"] = float(donor_data['location'].split(",")[1])
-            del donor_data['location']
             donor = Donor(**donor_data)
             # todo: verify number if we have time
             donor.save()
-
+        else:
+            return render(request=request, template_name="register_donor.html",
+                          context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
+                                   "too_young": False, "location_empty": True})
     donor_form = DonorForm()
     return render(request=request, template_name="register_donor.html",
-                  context={"donor_form": donor_form, "duplicate": False, "phone_error": False, "too_young": False})
+                  context={"donor_form": donor_form, "duplicate": False, "phone_error": False, "too_young": False, "location_empty": False})
 
 
 def request_form(request):
@@ -58,8 +58,8 @@ def request_form(request):
                 return render(request=request, template_name="request_form.html",
                               context={"request_form": request_form, "duplicate": False, "phone_error": True})
 
-            blood_request["x_location"] = float(blood_request['location'].split(",")[0])
-            blood_request["y_location"] = float(blood_request['location'].split(",")[1])
+            blood_request["longitude"] = float(blood_request['location'].split(",")[0])
+            blood_request["latitude"] = float(blood_request['location'].split(",")[1])
             del blood_request['location']
             request1 = Request(**blood_request)
             request1.save()
@@ -68,7 +68,7 @@ def request_form(request):
             return redirect("/confirm/request/")
     request_form = RequestForm()
     return render(request=request, template_name="request_form.html",
-                  context={"request_form": request_form, "duplicate": False, "phone_error": True})
+                  context={"request_form": request_form, "duplicate": False, "phone_error": False})
 
 
 def confirmation_message_request(request):
