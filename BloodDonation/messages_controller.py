@@ -3,15 +3,20 @@ import datetime
 import dill
 import random
 
-from django.shortcuts import get_object_or_404
 from BloodDonation.models import Donor, Request
+from DonationSystem.telethon_settings import telethon_client, start_telethon_client
+
+
 # todo: if 100 donors confirm that they are going, stop sending messages
+
+start_telethon_client()
 
 
 def get_donors(blood_type, body):
     request = dill.loads(body)
     all_possible_donors = Donor.objects.filter(
-        blood_type=blood_type, can_donate=True, last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
+        blood_type=blood_type, can_donate=True,
+        last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
     )
 
     donors = [(
@@ -27,15 +32,16 @@ def send_messages_o_neg(ch, method, properties, body):
     random.shuffle(donors)
     start_index = 0
     end_index = 50
-    # for wait_time in [1, 5, 7, 10, 15, 20, 30, 40, 50, 60]: # in minutes
-        # start_index += end_index
-        # end_index += 50
-        # for donors in donors_sets[start_index:end_index]:
-        #     try:
-        #         request = Request.objects.get(pk=request["id"])
-        # todo: send_message(): include message to confirm that they are going or they can send a specific message
-        # except BloodDonation.models.Request.DoesNotExist:
-        #         return "Request fulfilled"
+    for wait_time in [1, 5, 7, 10, 15, 20, 30, 40, 50, 60]:  # in minutes
+        start_index += end_index
+        end_index += 50
+        for donor in donors[start_index:end_index]:
+            try:
+                request = Request.objects.get(pk=request["id"])
+                telethon_client.send_message(donor.phone_number,
+                                             'Can you please donate blood at this location? if yes type "confirmed"')
+            except Request.DoesNotExist:
+                return "Request fulfilled"
         # todo: wait(wait_time)
 
     ch.basic_ack(delivery_tag=method.delivery_tag)
