@@ -1,4 +1,3 @@
-# TODO: not anyone can submit or confirm requests(only medical staff) if he knows the url (implement password?)
 from BloodDonation.models import Request
 
 

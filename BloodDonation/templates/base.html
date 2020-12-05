@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="{% static "BloodDonation/css/bootstrap.css" %}" rel="stylesheet" type="text/css" media="all"/>
+    <link href="{% static "BloodDonation/css/custom.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/flickity.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-roboto.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-frankruhl-firasans.css" %}" rel="stylesheet" type="text/css"
+          media="all"/>
+    <link href="{% static "BloodDonation/css/font-karla.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-merriweather-ptsans.css" %}" rel="stylesheet" type="text/css"
+          media="all">
+    <link href="{% static "BloodDonation/css/font-raleway.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-rubiklato.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-robotoslab.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/font-sourcesanspro.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/iconsmind.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/jquery.steps.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/lightbox.min.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/socicon.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/stack-interface.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-yeller.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-rtl.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-tangerine.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-serpent.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-aqua.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-cedar.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-charcoal.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-greensea.css" %}" rel="stylesheet" type="text/css" media="all">
+    <link href="{% static "BloodDonation/css/theme-red.css" %}" rel="stylesheet" type="text/css" media="all">
+
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+<div class="nav-container bg--dark">
+    <nav id="menu1" class="bar bar-1 hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="bar__module">
+                    <a href="https://www.redcross.org.lb/" target="_blank">
+                        <img class="nav-bar-logo" alt="logo" width="100" height="70" style="margin-right: 450px"
+                             src="{% static "BloodDonation/img/logo.svg" %}">
+                    </a>
+                    <a class="btn btn--sm btn--primary type--uppercase" href="/register/"> <span
+                            class="btn__text">
+                                    Become a Donor</span> </a>
+                    <a class="btn btn--sm btn--primary-1 type--uppercase" href="/request/"> <span
+                            class="btn__text">
+                                    New Request</span> </a>
+                    <a class="btn btn--sm btn--primary type--uppercase" href="/display_requests/"> <span
+                            class="btn__text">
+                                    Display Requests</span> </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+{% block body %}
+{% endblock %}
+<div class="tab__content" style="border-style: solid;
+ border-top-color: red; border-bottom-color: #222222; border-left-color: #222222; border-right-color: #222222">
+    <footer class="text-center space--sm footer-5  bg--dark" style="padding: 30px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div>
+                        <ul class="social-list list-inline list--hover">
+                            <li>
+                                <a href="https://twitter.com/redcrosslebanon?lang=en" target="_blank">
+                                    <i class="socicon socicon-twitter icon icon--sm"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.facebook.com/LebaneseRedCross/" target="_blank">
+                                    <i class="socicon socicon-facebook icon icon--sm"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.youtube.com/channel/UCKK2Vzfuvfk4CVtPjQZtDww" target="_blank">
+                                    <i class="socicon socicon-youtube icon icon--sm"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/lebaneseredcross/" target="_blank">
+                                    <i class="socicon socicon-instagram icon icon--sm"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <span class="type--fine-print">©<span class="update-year">2020</span>
+                            Lebanese Red Cross. All rights reserved.</span>
+                    </div>
+                </div>
+            </div>
+            <!--end of row-->
+        </div>
+        <!--end of container-->
+    </footer>
+</div>
+</body>
+
+{% block scripts %}
+{% endblock %}
+<script src="{% static "BloodDonation/js/countdown.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/datepicker.js" %}"></script>
+<script src="{% static "BloodDonation/js/easypiechart.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/flickity.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/granim.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/isotope.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/jquery.steps.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/jquery-3.1.1.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/lightbox.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/parallax.js" %}"></script>
+<script src="{% static "BloodDonation/js/scripts.js" %}"></script>
+<script src="{% static "BloodDonation/js/smooth-scroll.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/spectragram.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/twitterfetcher.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/typed.min.js" %}"></script>
+<script src="{% static "BloodDonation/js/ytplayer.min.js" %}"></script>
+</html>

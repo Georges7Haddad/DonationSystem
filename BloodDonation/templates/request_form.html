@@ -1,37 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Request</title>
-    <h1>Request</h1>
-    {% if duplicate == True %}
-        <h4>Duplicate Request</h4>
-    {% endif %}
-    {% if phone_error == True %}
-        <h4>Please check your phone number</h4>
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <h3>Please insert the following information about the patient</h3>
-        <label>First Name</label>
-        {{ request_form.first_name }}
-        <br> <br> <label>Last Name</label>
-        {{ request_form.last_name }}
-        <br> <br> <label>Date of Birth</label>
-        {{ request_form.date_of_birth }}
-        <br> <br> <label>Phone Number to contact</label>
-        {{ request_form.phone_number }}
-        <br> <br> <label>Blood Type</label>
-        {{ request_form.blood_type }}
-        <br> <br> <label>District</label>
-        {{ request_form.location }}
-        <br> <br> <label>Number of Units needed</label>
-        {{ request_form.units_needed }}
-        <br><br><br>
-        <button>SUBMIT</button>
-    </form>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Request
+{% endblock %}
+{% block body %}
+    {#    <li class="active">#}
+    <div class="tab__content" >
+        <section class="switchable">
+            <div class="container" style="margin-top: -50px">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="switchable__text">
+                            <h2>Create a New Blood Request</h2>
+                            {% if duplicate == True %}
+                                <h4>Duplicate Request</h4>
+                            {% endif %}
+                            {% if phone_error == True %}
+                                <h4>Please check your phone number</h4>
+                            {% endif %}
+                            <hr class="short">
+                            <form method="POST">
+                                {% csrf_token %}
+                                <h4>Please insert the following information about the patient</h4>
+                                <label>First Name</label>
+                                {{ request_form.first_name }}
+                                <br> <br> <label>Last Name</label>
+                                {{ request_form.last_name }}
+                                <br> <br> <label>Date of Birth</label>
+                                {{ request_form.date_of_birth }}
+                                <br> <br> <label>Phone Number to contact</label>
+                                {{ request_form.phone_number }}
+                                <br> <br> <label>Blood Type</label>
+                                {{ request_form.blood_type }}
+                                <br> <br> <label>District</label>
+                                {{ request_form.location }}
+                                <br> <br> <label>Number of Units needed</label>
+                                {{ request_form.units_needed }}
+                                <br><br><br>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn--primary">Send Request</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-5">
+                        <img alt="Image" class="border--round box-shadow-shallow"
+                             src="{% static "BloodDonation/img/Request1.gif" %}">
+                        <img alt="Image" class="border--round box-shadow-shallow"
+                             src="{% static "BloodDonation/img/Request1.gif" %}">
+                        <img alt="Image" class="border--round box-shadow-shallow"
+                             src="{% static "BloodDonation/img/Request1.gif" %}">
+                        <img alt="Image" class="border--round box-shadow-shallow"
+                             src="{% static "BloodDonation/img/Request1.gif" %}">
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
+            <!--end of container-->
+        </section>
+    </div>
+    {#    </li>#}
+{% endblock %}

@@ -1,89 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Register</title>
-    <h1>Register</h1>
-    {% if duplicate == True %}
-        <h4>You are already a registered as a donor</h4>
-    {% endif %}
-    {% if phone_error == True %}
-        <h4>Please check your phone number</h4>
-    {% endif %}
-    {% if too_young == True %}
-        <h4>You must be between 18 and 65 to donate</h4>
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <label>First Name</label>
-        {{ donor_form.first_name }}
-        <br> <br> <label>Last Name</label>
-        {{ donor_form.last_name }}
-        <br> <br> <label>Email Address</label>
-        {{ donor_form.email_address }}
-        <br> <br> <label>Date Of Birth</label>
-        {{ donor_form.date_of_birth }}
-        <br> <br> <label>Phone Number</label>
-        {{ donor_form.phone_number }}
-        <br> <br> <label>Blood Type</label>
-        {{ donor_form.blood_type }}
-        {% if location_empty == True %}
-            <h4>Please enter your location</h4>
-        {% endif %}
-        <br> <br> <label for="long" id="longLabel">Longitude</label>
-        {{ donor_form.longitude }}
-        <br> <br> <label for="lat" id="latLabel">Latitude</label>
-        {{ donor_form.latitude }}
-        <br><br><br>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Register
+{% endblock %}
+{% block body %}
+    {#    <li class="active">#}
+    <div class="tab__content">
+        <section class="switchable">
+            <div class="container" style="margin-top: -50px">
+                <div class="row justify-content-between align-items-center">
+                <div class="col-md-6 col-lg-5">
+                        <img alt="Image" class="border--round box-shadow-shallow"
+                             src="{% static "BloodDonation/img/Donor4.png" %}">
+                    </div>
+                    <div class="col-md-6 col-lg-5">
+                        <div class="switchable__text">
+                            <h2>Become A Donor</h2>
+                            {% if duplicate == True %}
+                                <h4>You are already a registered as a donor</h4>
+                            {% endif %}
+                            {% if phone_error == True %}
+                                <h4>Please check your phone number</h4>
+                            {% endif %}
+                            {% if too_young == True %}
+                                <h4>You must be between 18 and 65 to donate</h4>
+                            {% endif %}
+                            <hr class="short">
 
-        {#    <div class="container" style="float: right">#}
-        {#        <iframe#}
-        {#                width="600"#}
-        {#                height="500"#}
-        {#                style="border:0"#}
-        {#                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCB02UrjJJLlxJTnzVNkl4Xfne-BKrqz7s&maptype=roadmap&q=place_id:ChIJs--MqP1YwokRBwAhjXWIHn8"#}
-        {#                allowfullscreen>#}
-        {#        </iframe>#}
-        {#    </div>#}
+                            <form method="POST">
+                                {% csrf_token %}
+                                <label>First Name</label>
+                                {{ donor_form.first_name }}
+                                <br> <br> <label>Last Name</label>
+                                {{ donor_form.last_name }}
+                                <br> <br> <label>Email Address</label>
+                                {{ donor_form.email_address }}
+                                <br> <br> <label>Date Of Birth</label>
+                                {{ donor_form.date_of_birth }}
+                                <br> <br> <label>Phone Number</label>
+                                {{ donor_form.phone_number }}
+                                <br> <br> <label>Blood Type</label>
+                                {{ donor_form.blood_type }}
+                                {% if location_empty == True %}
+                                    <h4>Please enter your location</h4>
+                                {% endif %}
+                                <br> <br> <label for="long" id="longLabel">Longitude</label>
+                                {{ donor_form.longitude }}
+                                <br> <br> <label for="lat" id="latLabel">Latitude</label>
+                                {{ donor_form.latitude }}
+                                <br><br><br>
 
-        <button onclick="checkLocation()">SUBMIT</button>
-    </form>
-    <button id="getLocationButton" onclick="getLocation()">Get Location</button>
-</head>
-<body>
+                                {#    <div class="container" style="float: right">#}
+                                {#        <iframe#}
+                                {#                width="600"#}
+                                {#                height="500"#}
+                                {#                style="border:0"#}
+                                {#                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCB02UrjJJLlxJTnzVNkl4Xfne-BKrqz7s&maptype=roadmap&q=place_id:ChIJs--MqP1YwokRBwAhjXWIHn8"#}
+                                {#                allowfullscreen>#}
+                                {#        </iframe>#}
+                                {#    </div>#}
 
-</body>
-</html>
-<script>
-    var x = document.getElementById("long");
-    var y = document.getElementById("lat");
-    var getLocationButton = document.getElementById("getLocationButton");
+                                <button type="submit" class="btn btn--primary" onclick="checkLocation()">SUBMIT</button>
+                            </form>
+                            <button type="submit" class="btn btn--primary-2" id="getLocationButton"
+                                    onclick="getLocation()">Get Location
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--end of row-->
+            </div>
+            <!--end of container-->
+        </section>
+    </div>
+    {#    </li>#}
+{% endblock %}
 
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
-        } else {
-            x.innerHTML = "Geolocation is not supported by this browser.";
+{% block scripts %}
+    <script>
+        var x = document.getElementById("long");
+        var y = document.getElementById("lat");
+        var getLocationButton = document.getElementById("getLocationButton");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+            getLocationButton.insertAdjacentText("afterend", "We will have your location by the time you finish reading this and we'll be displaying your coordinates");
         }
-        getLocationButton.insertAdjacentText("afterend", "We will have your location by the time you finish reading this and we'll be displaying your coordinates");
-    }
 
-    function showPosition(position) {
-        x.value = position.coords.longitude;
-        y.value = position.coords.latitude;
-    }
-</script>
-<script>
-    var x = document.getElementById("long");
-    var y = document.getElementById("lat");
-    var xLabel = document.getElementById("longLabel");
-    var yLabel = document.getElementById("latLabel");
-
-    function checkLocation() {
-        if (x.value == null) {
-            x.setAttribute("readonly", "false");
-            x.insertAdjacentText("afterend", "Please add location");
+        function showPosition(position) {
+            x.value = position.coords.longitude;
+            y.value = position.coords.latitude;
         }
-    }
+    </script>
+    <script>
+        var x = document.getElementById("long");
+        var y = document.getElementById("lat");
+        var xLabel = document.getElementById("longLabel");
+        var yLabel = document.getElementById("latLabel");
 
-</script>
+        function checkLocation() {
+            if (x.value == null) {
+                x.setAttribute("readonly", "false");
+                x.insertAdjacentText("afterend", "Please add location");
+            }
+        }
+    </script>
+{% endblock %}

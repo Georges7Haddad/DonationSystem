@@ -8,6 +8,18 @@ from BloodDonation.models import Donor, Request
 from django.http import HttpResponse
 from DonationSystem.settings import channel
 
+allowedIps = ["127.0.0.1"]
+
+
+def allow_by_ip(view_func):
+    def authorize(request, *args, **kwargs):
+        user_ip = request.META['REMOTE_ADDR']
+        if user_ip in allowedIps:
+            return view_func(request, *args, **kwargs)
+        return HttpResponse('Invalid Ip Access!')
+
+    return authorize
+
 
 def register_donor(request):
     if request.method == "POST":
@@ -26,7 +38,8 @@ def register_donor(request):
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": True,
                                        "too_young": False})
             # Check Age Between 18 and 65
-            if datetime.date.today() - donor_data["date_of_birth"] < datetime.timedelta(days=6570) or datetime.date.today() - donor_data["date_of_birth"] > datetime.timedelta(days=23725):
+            if datetime.date.today() - donor_data["date_of_birth"] < datetime.timedelta(
+                    days=6570) or datetime.date.today() - donor_data["date_of_birth"] > datetime.timedelta(days=23725):
                 return render(request=request, template_name="register_donor.html",
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
                                        "too_young": True})
@@ -39,9 +52,11 @@ def register_donor(request):
                                    "too_young": False, "location_empty": True})
     donor_form = DonorForm()
     return render(request=request, template_name="register_donor.html",
-                  context={"donor_form": donor_form, "duplicate": False, "phone_error": False, "too_young": False, "location_empty": False})
+                  context={"donor_form": donor_form, "duplicate": False, "phone_error": False, "too_young": False,
+                           "location_empty": False})
 
 
+@allow_by_ip
 def request_form(request):
     if request.method == "POST":
         request_form = RequestForm(request.POST)
@@ -80,6 +95,8 @@ def donation_confirmation(request, int):
     return redirect("/display_requests/")
 
 
+@allow_by_ip
 def display_requests(request, message=""):
     requests = Request.objects.all()
-    return render(request=request, template_name="display_requests.html", context={"requests": requests, "message": message})
+    return render(request=request, template_name="display_requests.html",
+                  context={"requests": requests, "message": message})
