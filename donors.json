@@ -1,161 +1,65 @@
 [
   {
     "model": "BloodDonation.donor",
-    "pk": 1,
+    "pk": 16,
     "fields": {
-      "first_name": "tes",
-      "last_name": "set",
-      "date_of_birth": "2020-10-27",
-      "phone_number": 543,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.3418595,
-      "y_location": 35.0904916,
-      "last_time_donated": "2020-11-16",
+      "first_name": "Kamil",
+      "last_name": "Abu Nader",
+      "date_of_birth": "1989-02-02",
+      "phone_number": 76572729,
+      "email_address": "kma58@mail.aub.edu",
+      "blood_type": "B+",
+      "longitude": 35.5986912,
+      "latitude": 33.9045303,
+      "last_time_donated": "2020-07-14",
       "can_donate": true
     }
   },
   {
     "model": "BloodDonation.donor",
-    "pk": 2,
+    "pk": 17,
     "fields": {
-      "first_name": "university",
-      "last_name": "berkeley",
-      "date_of_birth": "2020-10-28",
-      "phone_number": 13,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 34.552631,
-      "y_location": 36.0698871,
-      "last_time_donated": "2020-11-16",
+      "first_name": "Karim",
+      "last_name": "Dahrouge",
+      "date_of_birth": "1989-02-02",
+      "phone_number": 3851838,
+      "email_address": "ksd05@mail.aub.edu",
+      "blood_type": "AB+",
+      "longitude": 35.5989582,
+      "latitude": 33.9045404,
+      "last_time_donated": "2020-07-10",
       "can_donate": true
     }
   },
   {
     "model": "BloodDonation.donor",
-    "pk": 3,
+    "pk": 18,
     "fields": {
-      "first_name": "sgr",
-      "last_name": "sgr",
-      "date_of_birth": "2020-11-04",
-      "phone_number": 2,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.85177,
-      "y_location": 35.4202756,
-      "last_time_donated": "2020-11-16",
+      "first_name": "Nader",
+      "last_name": "Abdul Salam",
+      "date_of_birth": "1989-02-02",
+      "phone_number": 81751772,
+      "email_address": "nha59@mail.aub.edu",
+      "blood_type": "A-",
+      "longitude": 35.5989582,
+      "latitude": 33.9045404,
+      "last_time_donated": "2020-07-14",
       "can_donate": true
     }
   },
   {
     "model": "BloodDonation.donor",
-    "pk": 4,
+    "pk": 19,
     "fields": {
-      "first_name": "srgs",
-      "last_name": "rsa",
-      "date_of_birth": "2020-10-27",
-      "phone_number": 42,
-      "email_address": "test@mail.com",
+      "first_name": "Georges",
+      "last_name": "Haddad",
+      "date_of_birth": "1999-02-02",
+      "phone_number": 81716166,
+      "email_address": "gsh05@mail.aub.edu",
       "blood_type": "O-",
-      "x_location": 33.893791,
-      "y_location": 35.501778,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 5,
-    "fields": {
-      "first_name": "sdhgs",
-      "last_name": "gawe",
-      "date_of_birth": "2020-11-02",
-      "phone_number": 53,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.6750714,
-      "y_location": 35.5740904,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 6,
-    "fields": {
-      "first_name": "rgs",
-      "last_name": "grs",
-      "date_of_birth": "2020-10-26",
-      "phone_number": 45463,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.85177,
-      "y_location": 35.4202756,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 7,
-    "fields": {
-      "first_name": "gsrg",
-      "last_name": "gsrrags",
-      "date_of_birth": "2020-10-26",
-      "phone_number": 643,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 34.3196628,
-      "y_location": 35.6880946,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 8,
-    "fields": {
-      "first_name": "sgr",
-      "last_name": "grsg",
-      "date_of_birth": "2020-11-04",
-      "phone_number": 4342,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 34.552631,
-      "y_location": 36.0698871,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 9,
-    "fields": {
-      "first_name": "fstr",
-      "last_name": "rgs",
-      "date_of_birth": "2020-10-26",
-      "phone_number": 654451,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.6750714,
-      "y_location": 35.5740904,
-      "last_time_donated": "2020-11-16",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
-    "pk": 10,
-    "fields": {
-      "first_name": "fstr",
-      "last_name": "rgs",
-      "date_of_birth": "1980-09-11",
-      "phone_number": 1,
-      "email_address": "test@mail.com",
-      "blood_type": "O-",
-      "x_location": 33.6750714,
-      "y_location": 35.5740904,
-      "last_time_donated": "2020-11-16",
+      "longitude": 35.5989582,
+      "latitude": 33.9045404,
+      "last_time_donated": "2020-08-22",
       "can_donate": true
     }
   }

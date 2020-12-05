@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db import models
 
 BLOOD_TYPE_CHOICES = (
@@ -36,7 +36,8 @@ class Donor(models.Model):
     blood_type = models.CharField(max_length=3, choices=BLOOD_TYPE_CHOICES)
     longitude = models.FloatField()
     latitude = models.FloatField()
-    last_time_donated = models.DateField(default=datetime.today().strftime('%Y-%m-%d'))
+    date = datetime.today().date() - timedelta(weeks=15)
+    last_time_donated = models.DateField(default=date.strftime('%Y-%m-%d'))
     can_donate = models.BooleanField(default=True)
 
     def __str__(self):

@@ -1,17 +1,17 @@
 import math
 import datetime
 import dill
+import random
 
 from django.shortcuts import get_object_or_404
 from BloodDonation.models import Donor, Request
-# todo: donors that receives the first message should be shuffled everytime
 # todo: if 100 donors confirm that they are going, stop sending messages
 
 
 def get_donors(blood_type, body):
     request = dill.loads(body)
     all_possible_donors = Donor.objects.filter(
-        blood_type=blood_type, can_donate=True, last_time_donated=datetime.date.today() - datetime.timedelta(weeks=13)
+        blood_type=blood_type, can_donate=True, last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
     )
 
     donors = [(
@@ -24,6 +24,7 @@ def get_donors(blood_type, body):
 
 def send_messages_o_neg(ch, method, properties, body):
     request, donors = get_donors("O-", body)
+    random.shuffle(donors)
     start_index = 0
     end_index = 50
     # for wait_time in [1, 5, 7, 10, 15, 20, 30, 40, 50, 60]: # in minutes
@@ -42,34 +43,41 @@ def send_messages_o_neg(ch, method, properties, body):
 
 def send_messages_o_pos(ch, method, properties, body):
     request, donors = get_donors("O+", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_a_neg(ch, method, properties, body):
     request, donors = get_donors("A-", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_a_pos(ch, method, properties, body):
     request, donors = get_donors("A+", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_b_neg(ch, method, properties, body):
     request, donors = get_donors("B-", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_b_pos(ch, method, properties, body):
     request, donors = get_donors("B+", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_ab_neg(ch, method, properties, body):
     request, donors = get_donors("AB-", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_messages_ab_pos(ch, method, properties, body):
     request, donors = get_donors("AB+", body)
+    random.shuffle(donors)
     ch.basic_ack(delivery_tag=method.delivery_tag)
