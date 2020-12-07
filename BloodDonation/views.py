@@ -3,14 +3,12 @@ import random
 import dill
 
 from django.shortcuts import render, redirect
-from BloodDonation.confirmations_controller import confirm_donation
-from BloodDonation.forms import RequestForm, DonorForm
+from BloodDonation.controllers.confirmations_controller import confirm_donation
+from BloodDonation.forms import RequestForm, DonorForm, HOSPITAL_CHOICES
 from BloodDonation.models import Donor, Request
 from django.http import HttpResponse
 from DonationSystem.settings import channel
-from telethon.tl.functions.contacts import ImportContactsRequest
 from telethon.tl.types import InputPhoneContact
-from DonationSystem.telethon_settings import start_telethon_client, telethon_client
 
 allowedIps = ["127.0.0.1"]
 
@@ -48,12 +46,11 @@ def register_donor(request):
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
                                        "too_young": True})
             donor = Donor(**donor_data)
-            # todo: verify number if we have time
+            # todo: verify number if we have time + webhook for message to remove from DB
             # Add Donor to contacts
-            start_telethon_client()
             contact = InputPhoneContact(client_id=random.randint(0, 999999), phone="+961" + str(donor_data["phone_number"]),
                                         first_name=donor_data["first_name"], last_name=donor_data["last_name"])
-            telethon_client(ImportContactsRequest([contact]))
+            channel.basic_publish(exchange='', routing_key="contacts", body=dill.dumps(contact))
             donor.save()
         else:
             return render(request=request, template_name="register_donor.html",
@@ -84,6 +81,11 @@ def request_form(request):
 
             blood_request["longitude"] = float(blood_request['location'].split(",")[0])
             blood_request["latitude"] = float(blood_request['location'].split(",")[1])
+            for hospital in HOSPITAL_CHOICES:
+                if blood_request["location"] == hospital[0]:
+                    blood_request["hospital"] = hospital[1]
+                    break
+
             del blood_request['location']
             request1 = Request(**blood_request)
             request1.save()

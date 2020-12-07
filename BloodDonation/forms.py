@@ -23,6 +23,11 @@ CITIES_CHOICES = (
     ("33.3418595,35.0904916", "South"),
 )
 
+HOSPITAL_CHOICES = (
+    ("33.8977754,35.4858408", "AUB Medical Center"),
+    ("33.885264,35.515033", "LAU Medical Center-Rizk Hospital")
+)
+
 
 class DateInput(forms.DateInput):
     input_type = "date"
@@ -56,7 +61,7 @@ class RequestForm(forms.Form):
     date_of_birth = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
     phone_number = forms.IntegerField()
     blood_type = forms.ChoiceField(choices=BLOOD_TYPE_CHOICES)
-    location = forms.ChoiceField(choices=CITIES_CHOICES)
+    location = forms.ChoiceField(choices=HOSPITAL_CHOICES)
     units_needed = forms.IntegerField()
 
     fields = [

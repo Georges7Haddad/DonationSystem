@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django_telethon_session',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'BloodDonation'
@@ -140,3 +139,5 @@ channel.queue_declare(queue='O+')
 channel.queue_declare(queue='O-')
 channel.queue_declare(queue='AB+')
 channel.queue_declare(queue='AB-')
+channel.queue_declare(queue='contacts')
+channel.queue_declare(queue='messages')

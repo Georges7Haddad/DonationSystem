@@ -36,4 +36,3 @@ whitenoise==5.0.1
 dill==0.3.2
 pika==1.1.0
 telethon==1.18.2
-django-telethon-session==0.9

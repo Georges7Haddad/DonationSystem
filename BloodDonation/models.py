@@ -22,6 +22,8 @@ class Request(models.Model):
     longitude = models.FloatField()
     latitude = models.FloatField()
     units_needed = models.PositiveIntegerField()
+    users_confirmations = models.PositiveIntegerField(default=0)
+    hospital = models.CharField(max_length=26)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.blood_type} {self.units_needed}"
