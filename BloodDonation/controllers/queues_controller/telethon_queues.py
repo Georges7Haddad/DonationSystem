@@ -14,10 +14,14 @@ def add_contact(ch, method, properties, body):
 
 
 def send_message(ch, method, properties, body):
-    donor = dill.loads(body)
-    # todo: add name and hospital
-    # telethon_client.send_message("+961" + str(donor[0].phone_number), f'Patient {request.id} needs blood in {hospital}')
-    telethon_client.send_message("+961" + str(donor[0].phone_number), 'If you can donate please send "Confirmed"')
+    body = dill.loads(body)
+    donor = body["donor"]
+    request = body["request"]
+    donor_number = "+961" + str(donor[0].phone_number)
+    telethon_client.send_message(donor_number, f'Hey {donor[0].first_name}, id: {donor[0].pk}')
+    telethon_client.send_message(donor_number, f'Patient {request.id} needs {request.blood_type} blood in {request.hospital}\nIf you can donate please send "Confirmed"\nIf you wish to be removed from our database please send "Unsubscribe"')
+    telethon_client.send_message(donor_number, f'Arabic Hey {donor[0].first_name}, id: {donor[0].pk}')
+    telethon_client.send_message(donor_number, f'يحتاج المريض {request.id} إلى {request.blood_type} دم {request.hospital} \ n إذا كان بإمكانك التبرع ، فيرجى إرسال "مؤكد" إذا كنت ترغب في الإزالة من قاعدة بياناتنا ، فيرجى إرسال "إلغاء الاشتراك "')
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 

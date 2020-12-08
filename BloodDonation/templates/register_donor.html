@@ -9,7 +9,7 @@
         <section class="switchable">
             <div class="container" style="margin-top: -50px">
                 <div class="row justify-content-between align-items-center">
-                <div class="col-md-6 col-lg-5" style="margin-top: -120px">
+                    <div class="col-md-6 col-lg-5" style="margin-top: -120px">
                         <img alt="Image" class="border--round box-shadow-shallow"
                              src="{% static "BloodDonation/img/Donor4.png" %}">
                     </div>
@@ -38,7 +38,14 @@
                                 <br> <br> <label>Date Of Birth</label>
                                 {{ donor_form.date_of_birth }}
                                 <br> <br> <label>Phone Number</label>
-                                {{ donor_form.phone_number }}
+                                <div class="row">
+                                    <div class="col-sm-3 col-sm-3">
+                                        <label><input type="text" readonly value="+961"></label>
+                                    </div>
+                                    <div class="col-md-8 col-lg-8">
+                                        {{ donor_form.phone_number }}
+                                    </div>
+                                </div>
                                 <br> <br> <label>Blood Type</label>
                                 {{ donor_form.blood_type }}
                                 {% if location_empty == True %}

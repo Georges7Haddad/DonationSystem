@@ -4,7 +4,7 @@ import dill
 
 from django.shortcuts import render, redirect
 from BloodDonation.controllers.confirmations_controller import confirm_donation
-from BloodDonation.forms import RequestForm, DonorForm, HOSPITAL_CHOICES
+from BloodDonation.forms import RequestForm, DonorForm, HOSPITAL_CHOICES, ConfirmationForm
 from BloodDonation.models import Donor, Request
 from django.http import HttpResponse
 from DonationSystem.settings import channel
@@ -46,7 +46,7 @@ def register_donor(request):
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
                                        "too_young": True})
             donor = Donor(**donor_data)
-            # todo: verify number if we have time + webhook for message to remove from DB
+            # todo: verify number if we have time
             # Add Donor to contacts
             contact = InputPhoneContact(client_id=random.randint(0, 999999), phone="+961" + str(donor_data["phone_number"]),
                                         first_name=donor_data["first_name"], last_name=donor_data["last_name"])
@@ -102,12 +102,17 @@ def confirmation_message_request(request):
 
 
 def donation_confirmation(request, int):
-    confirm_donation(int)
+    if request.method == "POST":
+        request_form = ConfirmationForm(request.POST)
+        if request_form.is_valid():
+            donor_id = request_form.cleaned_data["donor_id"]
+            confirm_donation(int, donor_id)
     return redirect("/display_requests/")
 
 
 @allow_by_ip
-def display_requests(request, message=""):
+def display_requests(request):
     requests = Request.objects.all()
+    confirmation_form = ConfirmationForm()
     return render(request=request, template_name="display_requests.html",
-                  context={"requests": requests, "message": message})
+                  context={"requests": requests, "confirmation_form": confirmation_form})

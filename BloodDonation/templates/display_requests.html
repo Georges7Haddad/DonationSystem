@@ -7,24 +7,28 @@
                     <div class="col-md-12">
                         <div class="cta cta-1 cta--horizontal boxed boxed--border text-center-xs">
                             {% for request in requests %}
-                                <div class="row justify-content-center p-5">
-                                    <div class="col-lg-3">
-                                        <h4>{{ request.first_name }} {{ request.last_name }} {{ request.blood_type }} </h4>
+                                <form method="post" action="/confirmed_donation/{{ request.id }}/">
+                                    {% csrf_token %}
+                                    <div class="row justify-content-center p-5">
+                                        <div class="col-lg-3">
+                                            <h4>{{ request.first_name }} {{ request.last_name }} {{ request.id }} {{ request.blood_type }} </h4>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p class="lead">
+                                                Units Needed: {{ request.units_needed }}
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-2 text-center">
+                                            {#                                            todo: label next to form #}
+                                            Donor Id
+                                            {{ confirmation_form.donor_id }}
+                                        </div>
+                                        <div class="col-lg-3 text-center">
+                                            <button class="btn btn--primary-1 type--uppercase"><span class="btn__text">Confirm 1 Donation</span>
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <p class="lead">
-                                            Units Needed: {{ request.units_needed }}
-                                        </p>
-                                    </div>
-                                    <div class="col-lg-4 text-center">
-                                        <a class="btn btn--primary-1 type--uppercase"
-                                           href="/confirmed_donation/{{ request.id }}">
-                                                            <span class="btn__text">
-                                                                Confirm 1 Donation
-                                                            </span>
-                                        </a>
-                                    </div>
-                                </div>
+                                </form>
                                 <!--end of row-->
                             {% endfor %}
                         </div>

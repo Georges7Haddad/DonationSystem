@@ -3,9 +3,8 @@ import datetime
 import dill
 import random
 
+from time import sleep
 from BloodDonation.models import Donor, Request
-
-# todo: if 100 donors confirm that they are going, stop sending messages
 from DonationSystem.settings import channel
 
 
@@ -15,8 +14,7 @@ def get_donors(blood_type, body):
     """
     request = dill.loads(body)
     all_possible_donors = Donor.objects.filter(
-        blood_type=blood_type, can_donate=True,
-        last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
+        blood_type=blood_type, last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
     )
 
     donors = [(
@@ -30,20 +28,22 @@ def get_donors(blood_type, body):
 def send_messages(request, donors, ch, method):
     # todo: we get all the donors sorted by closest distance then shuffle
     #       we need to find a way to send to closest donors without always starting with the same people
+    ch.basic_ack(delivery_tag=method.delivery_tag)
     random.shuffle(donors)
     start_index = 0
     end_index = 50
     try:
-        for wait_time in [1, 5, 7, 10, 15, 20, 30, 40, 50, 60]:  # in minutes
+        for wait_time in [1, 5, 7, 10, 15, 20]:  # in minutes
+            request = Request.objects.get(pk=request.id)
             for donor in donors[start_index:end_index]:
-                request = Request.objects.get(pk=request.id)
-                channel.basic_publish(exchange='', routing_key="messages", body=dill.dumps(donor))
+                if request.users_confirmations > request.units_needed * 5:
+                    return
+                channel.basic_publish(exchange='', routing_key="messages", body=dill.dumps({"donor": donor, "request": request}))
             start_index = end_index
             end_index += 50
-            # todo: wait(wait_time)
+            sleep(wait_time * 60)
     except Request.DoesNotExist:
-        ch.basic_ack(delivery_tag=method.delivery_tag)
-    ch.basic_ack(delivery_tag=method.delivery_tag)
+        return
 
 
 def consumer_o_neg(ch, method, properties, body):

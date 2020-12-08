@@ -1,22 +1,6 @@
 [
   {
     "model": "BloodDonation.donor",
-    "pk": 16,
-    "fields": {
-      "first_name": "Kamil",
-      "last_name": "Abu Nader",
-      "date_of_birth": "1989-02-02",
-      "phone_number": 76572729,
-      "email_address": "kma58@mail.aub.edu",
-      "blood_type": "B+",
-      "longitude": 35.5986912,
-      "latitude": 33.9045303,
-      "last_time_donated": "2020-07-14",
-      "can_donate": true
-    }
-  },
-  {
-    "model": "BloodDonation.donor",
     "pk": 17,
     "fields": {
       "first_name": "Karim",
@@ -24,11 +8,10 @@
       "date_of_birth": "1989-02-02",
       "phone_number": 3851838,
       "email_address": "ksd05@mail.aub.edu",
-      "blood_type": "AB+",
+      "blood_type": "B-",
       "longitude": 35.5989582,
       "latitude": 33.9045404,
-      "last_time_donated": "2020-07-10",
-      "can_donate": true
+      "last_time_donated": "2020-07-10"
     }
   },
   {
@@ -43,24 +26,37 @@
       "blood_type": "A-",
       "longitude": 35.5989582,
       "latitude": 33.9045404,
-      "last_time_donated": "2020-07-14",
-      "can_donate": true
+      "last_time_donated": "2020-07-14"
     }
   },
   {
     "model": "BloodDonation.donor",
-    "pk": 19,
+    "pk": 20,
+    "fields": {
+      "first_name": "Kamil",
+      "last_name": "Abu Nader",
+      "date_of_birth": "2000-10-05",
+      "phone_number": 76572729,
+      "email_address": "test@mail.com",
+      "blood_type": "O-",
+      "longitude": 34.0,
+      "latitude": 33.0,
+      "last_time_donated": "2020-08-24"
+    }
+  },
+  {
+    "model": "BloodDonation.donor",
+    "pk": 21,
     "fields": {
       "first_name": "Georges",
       "last_name": "Haddad",
-      "date_of_birth": "1999-02-02",
+      "date_of_birth": "2000-10-05",
       "phone_number": 81716166,
-      "email_address": "gsh05@mail.aub.edu",
+      "email_address": "test@mail.com",
       "blood_type": "O-",
-      "longitude": 35.5989582,
-      "latitude": 33.9045404,
-      "last_time_donated": "2020-08-22",
-      "can_donate": true
+      "longitude": 34.0,
+      "latitude": 33.0,
+      "last_time_donated": "2020-08-24"
     }
   }
 ]

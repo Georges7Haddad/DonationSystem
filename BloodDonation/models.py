@@ -23,7 +23,7 @@ class Request(models.Model):
     latitude = models.FloatField()
     units_needed = models.PositiveIntegerField()
     users_confirmations = models.PositiveIntegerField(default=0)
-    hospital = models.CharField(max_length=26)
+    hospital = models.CharField(max_length=100)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.blood_type} {self.units_needed}"
@@ -40,7 +40,6 @@ class Donor(models.Model):
     latitude = models.FloatField()
     date = datetime.today().date() - timedelta(weeks=15)
     last_time_donated = models.DateField(default=date.strftime('%Y-%m-%d'))
-    can_donate = models.BooleanField(default=True)
 
     def __str__(self):
         return f"Donor: {self.first_name} {self.last_name} {self.blood_type}"
