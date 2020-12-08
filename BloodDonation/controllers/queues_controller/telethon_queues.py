@@ -8,12 +8,28 @@ from DonationSystem.settings import channel
 
 
 def add_contact(ch, method, properties, body):
+    """
+       Callback to consume contacts to be added
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     contact = dill.loads(body)
     result = telethon_client(ImportContactsRequest([contact]))
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
 def send_message(ch, method, properties, body):
+    """
+       Callback to consume telegram messages to be sent
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     body = dill.loads(body)
     donor = body["donor"]
     request = body["request"]

@@ -47,40 +47,104 @@ def send_messages(request, donors, ch, method):
 
 
 def consumer_o_neg(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: O-
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("O-", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_o_pos(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: O+
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("O+", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_a_neg(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: A-
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("A-", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_a_pos(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: A+
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("A+", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_b_neg(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: B-
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("B-", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_b_pos(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: B+
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("B+", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_ab_neg(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: AB-
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("AB-", body)
     send_messages(request, donors, ch, method)
 
 
 def consumer_ab_pos(ch, method, properties, body):
+    """
+       Callback to consume requests with blood type: AB+
+       Parameters:
+           ch: Queue Channel
+           method: Queue Communication Method
+           properties: Message properties
+           body: Message body
+    """
     request, donors = get_donors("AB+", body)
     send_messages(request, donors, ch, method)

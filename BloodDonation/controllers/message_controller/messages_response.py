@@ -13,6 +13,11 @@ os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 @async_to_sync
 @telethon_client.on(events.NewMessage(pattern='Unsubscribe|unsubscribe|إلغاء الاشتراك'))
 async def unsubscribe_handler(event):
+    """
+       Handles the response of unsubscribe by removing the donor from the DB
+       Parameters:
+           event: New Message Event
+    """
     entity = await telethon_client.get_entity(event.chat_id)
     donor = Donor.objects.get(phone_number=entity.phone[3:])
     donor.delete()
@@ -22,6 +27,12 @@ async def unsubscribe_handler(event):
 @async_to_sync
 @telethon_client.on(events.NewMessage(pattern='confirmed|Confirmed|مؤكد'))
 async def confirmation_handler(event):
+    """
+       Handles the response of confirmed by incrementing the number of confirmed users in a request
+       Also handles the same user confirming multiple times
+       Parameters:
+           event: New Message Event
+    """
     confirmation_count = 0
     request_id = 0
     entity = await telethon_client.get_entity(event.chat_id)

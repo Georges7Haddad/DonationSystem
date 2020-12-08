@@ -8,6 +8,9 @@ from BloodDonation.controllers.message_controller import messages_controller
 
 
 def consume():
+    """
+       Declaring the callbacks for all blood queues
+    """
     for blood_type in ["A", "B", "O", "AB"]:
         for sign in ["+", "-"]:
             if sign == "+":

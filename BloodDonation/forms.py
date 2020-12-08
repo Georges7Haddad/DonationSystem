@@ -133,7 +133,6 @@ class DateInput(forms.DateInput):
 
 class ConfirmationForm(forms.Form):
     donor_id = forms.CharField(max_length=10, min_length=1)
-    # request_id = forms.CharField(max_length=10, min_length=1, widget=forms.TextInput(attrs={"readonly": "readonly"}))
 
 
 class DonorForm(forms.Form):
