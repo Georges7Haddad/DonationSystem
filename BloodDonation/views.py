@@ -12,7 +12,7 @@ from telethon.tl.types import InputPhoneContact
 
 allowedIps = ["127.0.0.1"]
 
-
+# todo: add password
 def allow_by_ip(func):
     """
        Decorator to only allow IPs in allowedIps to access a view
@@ -130,7 +130,7 @@ def donation_confirmation(request, request_id):
            request: Django Request
            request_id (int): Id of the request which got a donation
    """
-    # todo: handle donor that is not in DB
+    # todo: handle donor that is not in DB + check if donor has correct blood type + last time donated
     if request.method == "POST":
         request_form = ConfirmationForm(request.POST)
         if request_form.is_valid():
