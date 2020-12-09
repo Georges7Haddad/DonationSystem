@@ -72,7 +72,7 @@ def register_donor(request):
 
 
 @allow_by_ip
-def request_form(request):
+def request_page(request):
     """
        View for creating a new Request
        Parameters:
@@ -138,7 +138,8 @@ def donation_confirmation(request, request_id):
                     confirm_donation(request)
                     return redirect("/display_requests/")
                 donor = Donor.objects.get(id=donor_id)
-                if donor.blood_type != request.blood_type or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=13):
+                if donor.blood_type != request.blood_type \
+                        or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=13):
                     return redirect("/display_requests/")
                 confirm_donation(request)
                 donor.last_time_donated = datetime.date.today()

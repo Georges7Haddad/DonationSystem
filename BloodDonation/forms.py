@@ -132,7 +132,7 @@ class DateInput(forms.DateInput):
 
 
 class ConfirmationForm(forms.Form):
-    donor_id = forms.CharField(max_length=10, min_length=1)
+    donor_id = forms.CharField(max_length=10, min_length=1, widget=(forms.TextInput(attrs={"style": "height: 35px;width: 75px"})))
 
 
 class DonorForm(forms.Form):

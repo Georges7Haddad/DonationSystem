@@ -30,6 +30,7 @@ def send_message(ch, method, properties, body):
            properties: Message properties
            body: Message body
     """
+    # todo: Improve messages sent
     body = dill.loads(body)
     donor = body["donor"]
     request = body["request"]
