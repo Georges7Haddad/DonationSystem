@@ -7,6 +7,13 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="cta cta-1 cta--horizontal boxed boxed--border text-center-xs">
+                            <div class="container" style="text-align: center">
+                                <label for="donorCheckbox">
+                                    Donor is not in the Database
+                                </label>
+                                <input type="checkbox" onclick="hideDonor()" id="donorCheckbox" name="vehicle1"
+                                       style="width: 40px">
+                            </div>
                             {% for request in requests %}
                                 <form method="post" action="/confirmed_donation/{{ request.id }}/">
                                     {% csrf_token %}
@@ -21,12 +28,12 @@
                                         </div>
                                         <div class="col-sm-2 text-center">
                                             {#                                            todo: label next to form #}
-{#                                            todo: donor not in db#}
-                                            Donor Id
+                                            <label name="donor_id_label">Donor Id</label>
                                             {{ confirmation_form.donor_id }}
                                         </div>
                                         <div class="col-lg-3 text-center">
-                                            <button class="btn btn--primary-1 type--uppercase" style="width: 170px"><span class="btn__text">Confirm 1 Donation</span>
+                                            <button class="btn btn--primary-1 type--uppercase" style="width: 170px">
+                                                <span class="btn__text">Confirm 1 Donation</span>
                                             </button>
                                         </div>
                                     </div>
@@ -52,6 +59,26 @@
             }
         }
 
+        function hideDonor() {
+            var checkbox = document.getElementById("donorCheckbox");
+            var donorIds = document.getElementsByName("donor_id");
+            var donorIdsLabels = document.getElementsByName("donor_id_label");
+
+            if (checkbox.checked === true) {
+                for (var i = 0; i < donorIds.length; i++) {
+                    donorIds[i].hidden = true;
+                    donorIds[i].value = -5;
+                    donorIdsLabels[i].hidden = true;
+                }
+            }
+            else {
+                for (i = 0; i < donorIds.length; i++) {
+                    donorIds[i].hidden = false;
+                    donorIds[i].value = null;
+                    donorIdsLabels[i].hidden = false;
+                }
+            }
+        }
         run();
     </script>
 {% endblock %}

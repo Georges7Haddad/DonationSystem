@@ -6,7 +6,6 @@ from django.shortcuts import render, redirect
 from BloodDonation.controllers.confirmations_controller import confirm_donation
 from BloodDonation.forms import RequestForm, DonorForm, HOSPITAL_CHOICES, ConfirmationForm
 from BloodDonation.models import Donor, Request
-from django.http import HttpResponse
 from DonationSystem.settings import channel
 from telethon.tl.types import InputPhoneContact
 
@@ -134,11 +133,16 @@ def donation_confirmation(request, request_id):
         if request_form.is_valid():
             donor_id = request_form.cleaned_data["donor_id"]
             try:
-                donor = Donor.objects.get(id=donor_id)
                 request = Request.objects.get(id=request_id)
+                if donor_id == "-5":
+                    confirm_donation(request)
+                    return redirect("/display_requests/")
+                donor = Donor.objects.get(id=donor_id)
                 if donor.blood_type != request.blood_type or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=13):
                     return redirect("/display_requests/")
-                confirm_donation(request, donor)
+                confirm_donation(request)
+                donor.last_time_donated = datetime.date.today()
+                donor.save()
             except Donor.DoesNotExist:
                 return redirect("/display_requests/")
     return redirect("/display_requests/")
