@@ -12,7 +12,7 @@ from telethon.tl.types import InputPhoneContact
 
 allowedIps = ["127.0.0.1"]
 
-# todo: add password
+
 def allow_by_ip(func):
     """
        Decorator to only allow IPs in allowedIps to access a view
@@ -23,8 +23,7 @@ def allow_by_ip(func):
         user_ip = request.META['REMOTE_ADDR']
         if user_ip in allowedIps:
             return func(request, *args, **kwargs)
-        return HttpResponse('Invalid Ip Access!')
-
+        return render(request, "access_denied.html", context={"ip_address": True})
     return authorize
 
 
@@ -119,23 +118,29 @@ def confirmation_message_request(request):
        Parameters:
            request: Django request
    """
-    # todo: add template for this view
-    return HttpResponse("Requests have been sent to people who are able to donate.")
+    return render(request, "request_sent.html")
 
 
 def donation_confirmation(request, request_id):
     """
        When the medical staff confirms a donation, we update the request and donor
+       We also check for the blood type and last time donated of the donor
        Parameters:
            request: Django Request
            request_id (int): Id of the request which got a donation
    """
-    # todo: handle donor that is not in DB + check if donor has correct blood type + last time donated
     if request.method == "POST":
         request_form = ConfirmationForm(request.POST)
         if request_form.is_valid():
             donor_id = request_form.cleaned_data["donor_id"]
-            confirm_donation(request_id, donor_id)
+            try:
+                donor = Donor.objects.get(id=donor_id)
+                request = Request.objects.get(id=request_id)
+                if donor.blood_type != request.blood_type or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=13):
+                    return redirect("/display_requests/")
+                confirm_donation(request, donor)
+            except Donor.DoesNotExist:
+                return redirect("/display_requests/")
     return redirect("/display_requests/")
 
 

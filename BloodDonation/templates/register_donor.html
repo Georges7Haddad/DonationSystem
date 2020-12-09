@@ -51,25 +51,18 @@
                                 {% if location_empty == True %}
                                     <h4>Please enter your location</h4>
                                 {% endif %}
-                                <br> <br> <label for="long" id="longLabel">Longitude</label>
+                                <br> <br> <h5>
+                                Click on "Get Location" and your location will be entered automatically
+                            </h5>
+{#                                todo: Optional location#}
+                                <label for="long" id="longLabel">Longitude</label>
                                 {{ donor_form.longitude }}
                                 <br> <br> <label for="lat" id="latLabel">Latitude</label>
                                 {{ donor_form.latitude }}
                                 <br><br><br>
-
-                                {#    <div class="container" style="float: right">#}
-                                {#        <iframe#}
-                                {#                width="600"#}
-                                {#                height="500"#}
-                                {#                style="border:0"#}
-                                {#                src="https://www.google.com/maps/embed/v1/search?key=AIzaSyCB02UrjJJLlxJTnzVNkl4Xfne-BKrqz7s&maptype=roadmap&q=place_id:ChIJs--MqP1YwokRBwAhjXWIHn8"#}
-                                {#                allowfullscreen>#}
-                                {#        </iframe>#}
-                                {#    </div>#}
-
                                 <button type="submit" class="btn btn--primary" onclick="checkLocation()">SUBMIT</button>
                             </form>
-{#                        todo: add indication to click on get location #}
+                            <br>
                             <button type="submit" class="btn btn--primary-2" id="getLocationButton"
                                     onclick="getLocation()">Get Location
                             </button>
@@ -89,6 +82,7 @@
         var x = document.getElementById("long");
         var y = document.getElementById("lat");
         var getLocationButton = document.getElementById("getLocationButton");
+        var clickCount = 0;
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -96,7 +90,9 @@
             } else {
                 x.innerHTML = "Geolocation is not supported by this browser.";
             }
-            getLocationButton.insertAdjacentText("afterend", "We will have your location by the time you finish reading this and we'll be displaying your coordinates");
+            if (clickCount < 1)
+                getLocationButton.insertAdjacentText("afterend", "We will have your location by the time you finish reading this and we'll be displaying your coordinates");
+            ++clickCount;
         }
 
         function showPosition(position) {

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+    <div class="container">
+        {% if ip_address %}
+            <div class="container">
+                <img src="{% static "BloodDonation/img/invalid_ip.png" %}" alt="Access Denied"
+                     style="margin-top: 75px; margin-bottom: 75px">
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

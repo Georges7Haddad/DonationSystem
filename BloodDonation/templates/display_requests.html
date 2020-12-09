@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block body %}
     <div class="tab__content">
         <section class=" bg--secondary">
@@ -20,11 +21,12 @@
                                         </div>
                                         <div class="col-sm-2 text-center">
                                             {#                                            todo: label next to form #}
+{#                                            todo: donor not in db#}
                                             Donor Id
                                             {{ confirmation_form.donor_id }}
                                         </div>
                                         <div class="col-lg-3 text-center">
-                                            <button class="btn btn--primary-1 type--uppercase"><span class="btn__text">Confirm 1 Donation</span>
+                                            <button class="btn btn--primary-1 type--uppercase" style="width: 170px"><span class="btn__text">Confirm 1 Donation</span>
                                             </button>
                                         </div>
                                     </div>
@@ -39,4 +41,17 @@
             <!--end of container-->
         </section>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        function run() {
+            var password = prompt("Please Enter Password");
+            if (password !== 's') {
+                {#todo: Make it prettier#}
+                document.body.innerHTML = 'Password Failed! Reload to Renter Password';
+            }
+        }
+
+        run();
+    </script>
 {% endblock %}
