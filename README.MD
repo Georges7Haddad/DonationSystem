@@ -1,4 +1,4 @@
-
+# Donation System
 ## The Idea  
 This  project  aims  to  create  a  system  that  can  automate  the  blood  donation process  that  exists  in entities  
 such as the Lebanese  Red  Cross. This  process is  currently  done  manually  and  we  believe  that  automating  it  would   
@@ -18,6 +18,10 @@ To start working on the code, you'll need to clone the repo in your local direct
 
         $ pip install -r requirements.txt
 
+4. Migrate
+
+        $ python manage.py migrate
+
 Now, we need to run a rabbitmq server on port 5672. In the following steps, we will learn how to run a rabbitmq server using a docker container.  
   
 - Install Docker  
@@ -31,19 +35,28 @@ Now, we need to run a rabbitmq server on port 5672. In the following steps, we w
 - To start consuming objects from the telethon queues, run the telethon_queues and don't forget to specify the env variable `DJANGO_SETTINGS_MODULE=DonationSystem.settings` in the run configuration
 - To start answering to telegram messages, run the messages_response and don't forget to specify the env variable `DJANGO_SETTINGS_MODULE=DonationSystem.settings` in the run configuration
   
-## Components  
-![alt text](Components.png)  
+## Components
 ### Donor form  
 The document that people who want to add their names to the database will fill.  
 ### Request form  
-The document that people in need of blood will fill out in order to generate a request.  
-### Queue of requests  
-This data structure should save the requests, so we don't lose any blood request.  
-### Donors database  
-This database holds the blood donors who will get picked for a request.  
+The document that the medical staff will fill for a peron in need of blood to generate a request.  
+### Queues of requests
+This data structure is a message broker used to pass our requests to our messages_controller.
+Each blood type will have a specific queue.
+### Queues of Contacts and Messages
+This data structure is a message broker used to pass contacts to be added and messages to be sent. 
+### Database  
+We have 2 models(tables): one for the donors and one for the requests.
+The requests will be temporarily stored in the DB until they are fulfilled. In the meantime, we are able to check
+the remaining number of units needed and the number of donors that confirmed that they will be donating.    
 ## Flowchart  
 ![alt text](Flowchart.png)  
   
 #### Fixtures  
-- python3 manage.py dumpdata BloodDonation.Donor > donors.json  
-- python3 manage.py loaddata donors.json
+Fixtures are used to dump and load dummy data.
+- Dump Data from DB:
+
+        $ python manage.py dumpdata BloodDonation.Donor > donors.json
+- Load Data from JSON file:
+
+        $ python manage.py loaddata donors.json
