@@ -1,7 +1,6 @@
 import math
 import datetime
 import dill
-import random
 
 from time import sleep
 from BloodDonation.models import Donor, Request
@@ -14,7 +13,7 @@ def get_donors(blood_type, body):
     """
     request = dill.loads(body)
     all_possible_donors = Donor.objects.filter(
-        blood_type=blood_type, last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=13)
+        blood_type=blood_type, last_time_donated__lt=datetime.date.today() - datetime.timedelta(weeks=8)
     )
 
     donors = [(
@@ -26,10 +25,7 @@ def get_donors(blood_type, body):
 
 
 def send_messages(request, donors, ch, method):
-    # todo: we get all the donors sorted by closest distance then shuffle
-    #       we need to find a way to send to closest donors without always starting with the same people
     ch.basic_ack(delivery_tag=method.delivery_tag)
-    random.shuffle(donors)
     start_index = 0
     end_index = 50
     try:

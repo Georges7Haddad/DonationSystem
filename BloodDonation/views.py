@@ -54,8 +54,7 @@ def register_donor(request):
                               context={"donor_form": donor_form, "duplicate": False, "phone_error": False,
                                        "too_young": True})
             donor = Donor(**donor_data)
-            # todo: verify number if we have time
-            # Add Donor to contacts
+            # Add Donor to contacts queue
             contact = InputPhoneContact(client_id=random.randint(0, 999999),
                                         phone="+961" + str(donor_data["phone_number"]),
                                         first_name=donor_data["first_name"], last_name=donor_data["last_name"])
@@ -139,7 +138,7 @@ def donation_confirmation(request, request_id):
                     return redirect("/display_requests/")
                 donor = Donor.objects.get(id=donor_id)
                 if donor.blood_type != request.blood_type \
-                        or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=13):
+                        or donor.last_time_donated > datetime.date.today() - datetime.timedelta(weeks=8):
                     return redirect("/display_requests/")
                 confirm_donation(request)
                 donor.last_time_donated = datetime.date.today()

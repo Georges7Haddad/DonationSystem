@@ -9,8 +9,7 @@ from BloodDonation.models import Request, Donor
 from DonationSystem.telethon_client import telethon_client
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
-# todo: 1. Improve response messages
-#       2. Improve patterns
+
 @async_to_sync
 @telethon_client.on(events.NewMessage(pattern='Unsubscribe|unsubscribe|إلغاء الاشتراك'))
 async def unsubscribe_handler(event):
