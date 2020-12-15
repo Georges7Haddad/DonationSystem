@@ -21,11 +21,12 @@ async def unsubscribe_handler(event):
     entity = await telethon_client.get_entity(event.chat_id)
     donor = Donor.objects.get(phone_number=entity.phone[3:])
     donor.delete()
-    await event.respond("We're sorry to see you leave.\nWe successfully removed you from our database.")
+    await event.respond("We successfully removed you from our database.")
+    await event.respond("لقد نجحنا في إزالتك من قاعدة بياناتنا.")
 
 
 @async_to_sync
-@telethon_client.on(events.NewMessage(pattern='confirmed|Confirmed|مؤكد'))
+@telethon_client.on(events.NewMessage(pattern='confirmed|Confirmed|أكد'))
 async def confirmation_handler(event):
     """
        Handles the response of confirmed by incrementing the number of confirmed users in a request
@@ -41,6 +42,7 @@ async def confirmation_handler(event):
             confirmation_count += 1
             if confirmation_count > 1:
                 await event.respond("Thank you, but you have already confirmed you're going to donate.")
+                await event.respond("شكراً لك، لكنك أكدت بالفعل أنك ستتبرع.")
                 return
         if "Patient" in message.text:
             request_id = re.findall("\d", message.text)
@@ -52,8 +54,10 @@ async def confirmation_handler(event):
         request.users_confirmations = request.users_confirmations + 1
         request.save()
         await event.respond('Thank you!')
+        await event.respond('شكراً لك!')
     except Request.DoesNotExist:
         await event.respond(f'Thank you, but the request for patient {request_id} has been fulfilled')
+        await event.respond(f'شكراً لك، لكن طلب المريض{request_id} قد تم الوفاء به')
 
 telethon_client.add_event_handler(unsubscribe_handler)
 telethon_client.add_event_handler(confirmation_handler)

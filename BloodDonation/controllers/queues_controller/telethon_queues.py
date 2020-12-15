@@ -36,8 +36,8 @@ def send_message(ch, method, properties, body):
     donor_number = "+961" + str(donor[0].phone_number)
     telethon_client.send_message(donor_number, f'Hey {donor[0].first_name}, id: {donor[0].pk}')
     telethon_client.send_message(donor_number, f'Patient {request.id} needs {request.blood_type} blood in {request.hospital}\nIf you can donate please send "Confirmed"\nIf you wish to be removed from our database please send "Unsubscribe"')
-    telethon_client.send_message(donor_number, f'Arabic Hey {donor[0].first_name}, id: {donor[0].pk}')
-    telethon_client.send_message(donor_number, f'يحتاج المريض {request.id} إلى {request.blood_type} دم {request.hospital} \ n إذا كان بإمكانك التبرع ، فيرجى إرسال "مؤكد" إذا كنت ترغب في الإزالة من قاعدة بياناتنا ، فيرجى إرسال "إلغاء الاشتراك "')
+    telethon_client.send_message(donor_number, f' مرحبًا{donor[0].first_name}, id: {donor[0].pk}')
+    telethon_client.send_message(donor_number, f'يحتاج المريض{request.id} يحتاج دم {request.blood_type} في {request.hospital}  \nإذا كنت تستطيع التبرع الرجاء إرسال "أكد". إذا كنت ترغب في أن تتم إزالتك من قاعدة البيانات الخاصة بنا يرجى إرسال "إلغاء الاشتراك"')
     ch.basic_ack(delivery_tag=method.delivery_tag)
 
 
